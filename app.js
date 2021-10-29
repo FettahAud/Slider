@@ -6,13 +6,23 @@ const activeDot = document.querySelector('.active')
 
 // Some Var(s) 
 let right = 0
-slides.style.right = 0
 let currentSlide = 0;
 
+
+// Reset slides
+slides.style.right = 0
 activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
 
-// Slide's Right Click
-rightBut.addEventListener('click', (e) => {
+// Dot's Click Event
+dots.forEach(dot => dot.addEventListener('click', () => {
+    const index = dot.dataset.index
+    right = 80 * index
+    currentSlide = +index
+    slides.style.right = `${right}vw`
+    activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
+}))
+
+const swapRight = () => {
     currentSlide++
     right += 80
     slides.style.right = `${right}vw`
@@ -23,9 +33,8 @@ rightBut.addEventListener('click', (e) => {
     }
     // Slide's Buttons
     activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
-})
-// Slide's Left Click
-leftBut.addEventListener('click', () => {
+}
+const swapLeft = () => {
     if (right === 0) {
         slides.style.right = 320
         right = 320
@@ -36,11 +45,11 @@ leftBut.addEventListener('click', () => {
     slides.style.right = `${right}vw`
     // Slide's Buttons
     activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
-})
-dots.forEach(dot => dot.addEventListener('click', () => {
-    const index = dot.dataset.index
-    right = 80 * index
-    currentSlide = +index
-    slides.style.right = `${right}vw`
-    activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
-}))
+}
+
+// Add timer to change slide
+setInterval(() => swapRight(), 2000);
+
+// Button's Click Events
+rightBut.addEventListener('click', () => swapRight())
+leftBut.addEventListener('click', () => swapLeft())
