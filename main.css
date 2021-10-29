@@ -87,6 +87,7 @@ body {
   height: 12px;
   border: 2px solid white;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .container .slideDots .active {
@@ -97,6 +98,7 @@ body {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
+  pointer-events: none;
 }
 
 @keyframes activeDot {

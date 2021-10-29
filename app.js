@@ -37,3 +37,10 @@ leftBut.addEventListener('click', () => {
     // Slide's Buttons
     activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
 })
+dots.forEach(dot => dot.addEventListener('click', () => {
+    const index = dot.dataset.index
+    right = 80 * index
+    currentSlide = +index
+    slides.style.right = `${right}vw`
+    activeDot.style.left = dots[currentSlide + 1].offsetLeft + 'px'
+}))
